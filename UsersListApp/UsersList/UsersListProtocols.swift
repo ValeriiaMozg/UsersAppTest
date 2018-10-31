@@ -13,9 +13,9 @@ protocol UsersListViewModelDataInput: class {
     func obtainUsers(_ page: Int?, seed: String?, obtainedInfo:  @escaping (([UserDisplayModel], nextPage: Int, seed: String)) -> Void)
 }
 
-protocol UsersListViewModelOutput: class {
-    func reloadView()
+protocol UsersListViewModelOutput: BaseViewModelOutput {
     func insertCells(at indexPaths: [IndexPath])
+    func goToEditScreen(withUser user: UserDisplayModel)
 }
 
 extension UsersListViewModelDataInput {

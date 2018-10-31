@@ -20,6 +20,18 @@ class UsersListViewModel: NSObject {
     private var nextPage: Int = 1
     private var seed: String = ""
     
+    //MARK - Init
+    init(dataInput: UsersListViewModelDataInput, output: UsersListViewModelOutput) {
+        
+        self.dataInput = dataInput
+        self.output = output
+        
+        super.init()
+        
+        obtainContent()
+    }
+    
+    //MARK: - Public
     func obtainContent(_ page: Int? = nil, seed: String? = nil) {
         
         dataInput.obtainUsers(page, seed: seed) { (users, obtainedPage, seed) in
@@ -51,16 +63,6 @@ class UsersListViewModel: NSObject {
                 self.output?.insertCells(at: indexPaths)
             }
         }
-    }
-    
-    init(dataInput: UsersListViewModelDataInput, output: UsersListViewModelOutput) {
-        
-        self.dataInput = dataInput
-        self.output = output
-        
-        super.init()
-
-        obtainContent()
     }
 }
 
@@ -102,5 +104,11 @@ extension UsersListViewModel: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard isLoadingIndexPath(indexPath) else { return }
         obtainContent()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let user = content[indexPath.row]
+        output?.goToEditScreen(withUser: user)
     }
 }

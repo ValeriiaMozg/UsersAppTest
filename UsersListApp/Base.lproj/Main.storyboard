@@ -34,16 +34,86 @@
                     <navigationItem key="navigationItem" title="Users" id="Hty-m4-HBp"/>
                     <connections>
                         <outlet property="tableView" destination="zYJ-eM-Cac" id="GCQ-SJ-eur"/>
+                        <segue destination="3hn-Yy-zoZ" kind="show" id="Rcd-l6-1GE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50" y="919"/>
         </scene>
+        <!--Edit Profile-->
+        <scene sceneID="hur-y3-9g8">
+            <objects>
+                <viewController storyboardIdentifier="EditUserViewController" id="3hn-Yy-zoZ" customClass="EditUserViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GQw-X0-o23">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vc3-Q0-5wJ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="k6q-m8-mBL" customClass="EditProfileHeader" customModule="UsersListApp" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="186"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iQ-gY-57m">
+                                            <rect key="frame" x="144.5" y="143" width="86" height="28"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" title="Change photo"/>
+                                            <connections>
+                                                <action selector="didClickChangePhoto:" destination="k6q-m8-mBL" eventType="touchUpInside" id="Dqx-ER-sac"/>
+                                            </connections>
+                                        </button>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fDz-3i-kTt">
+                                            <rect key="frame" x="137.5" y="33" width="100" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="HfO-RH-Hfg"/>
+                                                <constraint firstAttribute="height" constant="100" id="Rqx-LJ-4MT"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="5iQ-gY-57m" firstAttribute="top" secondItem="fDz-3i-kTt" secondAttribute="bottom" constant="10" id="LUt-nP-NxZ"/>
+                                        <constraint firstItem="fDz-3i-kTt" firstAttribute="centerX" secondItem="k6q-m8-mBL" secondAttribute="centerX" id="Oqb-hQ-1rK"/>
+                                        <constraint firstItem="fDz-3i-kTt" firstAttribute="centerY" secondItem="k6q-m8-mBL" secondAttribute="centerY" constant="-10" id="RFr-80-eo3"/>
+                                        <constraint firstItem="5iQ-gY-57m" firstAttribute="centerX" secondItem="k6q-m8-mBL" secondAttribute="centerX" id="W0F-I4-wjf"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="profileImgView" destination="fDz-3i-kTt" id="qdE-y7-Whh"/>
+                                    </connections>
+                                </view>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Lus-8o-TqO" firstAttribute="trailing" secondItem="Vc3-Q0-5wJ" secondAttribute="trailing" id="8wC-L2-pnu"/>
+                            <constraint firstItem="Lus-8o-TqO" firstAttribute="bottom" secondItem="Vc3-Q0-5wJ" secondAttribute="bottom" id="hJK-jv-X7J"/>
+                            <constraint firstItem="Vc3-Q0-5wJ" firstAttribute="top" secondItem="Lus-8o-TqO" secondAttribute="top" id="kBJ-qG-Dx1"/>
+                            <constraint firstItem="Vc3-Q0-5wJ" firstAttribute="leading" secondItem="Lus-8o-TqO" secondAttribute="leading" id="oBc-Jc-27R"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Lus-8o-TqO"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="az8-Zi-5hP">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="YTJ-4E-Tch">
+                            <connections>
+                                <action selector="didClickSave:" destination="3hn-Yy-zoZ" id="Jmz-oL-HR8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableHeader" destination="k6q-m8-mBL" id="ktk-T3-65k"/>
+                        <outlet property="tableView" destination="Vc3-Q0-5wJ" id="kKa-aL-TzY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NBH-qQ-if0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="261.60000000000002" y="1730.2848575712146"/>
+        </scene>
         <!--Saved-->
         <scene sceneID="kzZ-rc-8n7">
             <objects>
-                <viewController id="5uG-tP-rH7" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SavedUsersViewController" id="5uG-tP-rH7" customClass="SavedUsersViewController" customModule="UsersListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jtv-O7-KJJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -87,11 +157,11 @@
             </objects>
             <point key="canvasLocation" x="132" y="132.68365817091455"/>
         </scene>
-        <!--Item-->
+        <!--Users-->
         <scene sceneID="jQw-d4-Tfr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2hh-Ge-Sv9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="tab_users" id="m7T-96-ls3"/>
+                    <tabBarItem key="tabBarItem" title="Users" image="tab_users" selectedImage="tab_users" id="m7T-96-ls3"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Bvs-vY-nxS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -106,11 +176,11 @@
             </objects>
             <point key="canvasLocation" x="-806" y="919"/>
         </scene>
-        <!--Item-->
+        <!--Saved-->
         <scene sceneID="Clh-Yl-5CQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="g1h-oH-UXG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="f9Q-Pu-Thr"/>
+                    <tabBarItem key="tabBarItem" title="Saved" image="tab_saved" id="f9Q-Pu-Thr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xlg-xg-224">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -127,6 +197,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="tab_saved" width="28" height="26"/>
         <image name="tab_users" width="34" height="23"/>
     </resources>
 </document>

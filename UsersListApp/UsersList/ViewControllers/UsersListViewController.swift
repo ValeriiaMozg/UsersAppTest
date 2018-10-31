@@ -35,11 +35,22 @@ class UsersListViewController: UIViewController {
 
 extension UsersListViewController: UsersListViewModelOutput {
     
+    func goToEditScreen(withUser user: UserDisplayModel) {
+        
+        guard let editUserVC = storyboard?.instantiateViewController(withIdentifier: "EditUserViewController") as? EditUserViewController else { return }
+        editUserVC.configureWithUser(user)
+        navigationController?.pushViewController(editUserVC, animated: true)
+    }
+    
     func insertCells(at indexPaths: [IndexPath]) {
+        
+        UIView.setAnimationsEnabled(false)
         
         tableView.beginUpdates()
         tableView.insertRows(at: indexPaths, with: .fade)
         tableView.endUpdates()
+        
+        UIView.setAnimationsEnabled(true)
     }
     
     func reloadView() {
