@@ -35,6 +35,13 @@ class UsersListViewController: UIViewController {
 
 extension UsersListViewController: UsersListViewModelOutput {
     
+    func insertCells(at indexPaths: [IndexPath]) {
+        
+        tableView.beginUpdates()
+        tableView.insertRows(at: indexPaths, with: .fade)
+        tableView.endUpdates()
+    }
+    
     func reloadView() {
         tableView.reloadData()
     }

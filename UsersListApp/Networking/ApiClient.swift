@@ -32,20 +32,28 @@ class ApiClient {
         
         parameters["results"] = 10
         
-        Alamofire.request(kBaseApi, method: .get, parameters: parameters).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(let value):
-                 let usersList = ListSerializer<User>.serialize(jsonList: JSON(value)["results"])
-                 
-                 if let metaInfoJSON = JSON(value)["info"].dictionaryObject {
-                    if let metaInfo = Mapper<MetaInfo>().map(JSONObject: metaInfoJSON) {
-                        info((usersList, metaInfo.page ?? 0, metaInfo.seed ?? ""))
-                    }
-                 }
+        DispatchQueue.global().async {
+            Alamofire.request(kBaseApi, method: .get, parameters: parameters).responseJSON { (response) in
                 
-            case .failure(let error):
-                err(error)
+                switch response.result {
+                case .success(let value):
+                    
+                    DispatchQueue.main.async {
+                        
+                        let usersList = ListSerializer<User>.serialize(jsonList: JSON(value)["results"])
+                        
+                        if let metaInfoJSON = JSON(value)["info"].dictionaryObject {
+                            if let metaInfo = Mapper<MetaInfo>().map(JSONObject: metaInfoJSON) {
+                                info((usersList, metaInfo.page ?? 0, metaInfo.seed ?? ""))
+                            }
+                        }
+                    }
+                    
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        err(error)
+                    }
+                }
             }
         }
     }

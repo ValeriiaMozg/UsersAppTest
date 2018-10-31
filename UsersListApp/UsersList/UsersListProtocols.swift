@@ -15,6 +15,7 @@ protocol UsersListViewModelDataInput: class {
 
 protocol UsersListViewModelOutput: class {
     func reloadView()
+    func insertCells(at indexPaths: [IndexPath])
 }
 
 extension UsersListViewModelDataInput {

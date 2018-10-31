@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class UserTableCell: UITableViewCell {
 
@@ -21,8 +22,9 @@ class UserTableCell: UITableViewCell {
     }
 
     func configure(withUser user: UserDisplayModel) {
-//        avatarImgView.image =
-        nameLabel.text = user.name + user.lastname
+        avatarImgView.sd_setImage(with: URL(string: user.avatarTrumb))
+        let username = user.name + " " + user.lastname
+        nameLabel.text = username.capitalized
         phoneLabel.text = user.phone
     }
 }
