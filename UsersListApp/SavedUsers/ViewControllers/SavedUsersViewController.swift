@@ -10,18 +10,36 @@ import UIKit
 
 class SavedUsersViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    lazy var viewModel: SavedUsersViewModel = {
+        return SavedUsersViewModel(output: self, dataInput: self.dataProvider)
+    }()
+    
+    lazy var dataProvider: UsersDataProvider = {
+        return UsersDataProvider()
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.delegate = viewModel
+        tableView.dataSource = viewModel
+        
+        tableView.register(UINib(nibName: "UserTableCell", bundle: nil), forCellReuseIdentifier: "UserTableCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.obtainSavedUsers()
         
-        let users = CoreDataManager.shared.fetchUsers()
-        
-        print(users)
+        tabBarController?.tabBar.isHidden = false
     }
 
+}
+
+extension SavedUsersViewController: SavedUsersViewModelOutput {
+    
+    func reloadView() {
+        tableView.reloadData()
+    }
 }

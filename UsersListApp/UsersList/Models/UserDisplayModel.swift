@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
-struct UserDisplayModel {
+class UserDisplayModel {
     
     var email: String
     var name: String
@@ -17,13 +19,19 @@ struct UserDisplayModel {
     var avatarLarge: String
     var avatarTrumb: String
     
-    func editUserContent() -> [EditProfileCellObject] {
-        
-       let content = [EditProfileCellObject(title: "First Name", text: self.name),
-                   EditProfileCellObject(title: "Last Name", text: self.lastname),
-                   EditProfileCellObject(title: "Email", text: self.email),
-                   EditProfileCellObject(title: "Phone", text: self.phone)]
-        
-        return content
+    var editUserContent: [EditProfileCellObject] {
+        return [EditProfileCellObject(title: "First Name", text: Variable(self.name), cellType: .name),
+                EditProfileCellObject(title: "Last Name", text: Variable(self.lastname), cellType: .name),
+                EditProfileCellObject(title: "Email", text: Variable(self.email), cellType: .email),
+                EditProfileCellObject(title: "Phone", text: Variable(self.phone), cellType: .phone)]
+    }
+    
+    init(email: String, name: String, lastname: String, phone: String, avatarLarge: String, avatarThumb: String) {
+        self.email = email
+        self.name  = name
+        self.lastname = lastname
+        self.phone = phone
+        self.avatarLarge = avatarLarge
+        self.avatarTrumb = avatarThumb
     }
 }

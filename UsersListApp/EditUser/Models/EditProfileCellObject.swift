@@ -7,14 +7,24 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class EditProfileCellObject {
     
-    var title: String
-    var text: String
+    enum EditProfileCellType {
+        case name
+        case email
+        case phone
+    }
     
-    init(title: String, text: String) {
+    var title: String
+    var text: Variable<String>
+    var cellType: EditProfileCellType
+    
+    init(title: String, text: Variable<String>, cellType: EditProfileCellType) {
         self.title = title
         self.text = text
+        self.cellType = cellType
     }
 }

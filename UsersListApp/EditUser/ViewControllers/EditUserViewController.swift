@@ -7,14 +7,19 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class EditUserViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableHeader: EditProfileHeader!
     
-    private var user: UserDisplayModel?
+    @IBOutlet weak var saveBtn: UIBarButtonItem!
     
+    private var user: UserDisplayModel?
+    private var disposeBag = DisposeBag()
+
     lazy var dataProvider: UsersDataProvider = {
         return UsersDataProvider()
     }()
@@ -27,6 +32,7 @@ class EditUserViewController: UIViewController {
         super.viewDidLoad()
       
         binding()
+        initialSetup()
         
         if let user = user {
             viewModel.configure(withUser: user)
@@ -49,14 +55,14 @@ class EditUserViewController: UIViewController {
     
     
     @IBAction func didClickSave(_ sender: UIBarButtonItem) {
-        sender.isEnabled = false
+    
         viewModel.saveUser() {
+            navigationController?.popViewController(animated: true)
             tabBarController?.selectedIndex = 1
         }
     }
     
-    private func binding() {
-        
+    private func initialSetup() {
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
         tableView.tableFooterView = UIView()
@@ -64,6 +70,13 @@ class EditUserViewController: UIViewController {
         viewModel.headerInput = tableHeader
         
         tableView.register(UINib(nibName: "CellWithTextfield", bundle: nil), forCellReuseIdentifier: "CellWithTextfield")
+    }
+    
+    private func binding() {
+    
+        viewModel.savingEnabled?
+            .asObservable()
+            .bind(to: saveBtn.rx.isEnabled).disposed(by: disposeBag)
     }
 
 }

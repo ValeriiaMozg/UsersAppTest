@@ -97,6 +97,7 @@ extension UsersListViewModel: UITableViewDataSource {
 }
 
 extension UsersListViewModel: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
@@ -107,6 +108,8 @@ extension UsersListViewModel: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let user = content[indexPath.row]
         output?.goToEditScreen(withUser: user)

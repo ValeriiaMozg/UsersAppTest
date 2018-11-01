@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UsersListApp/SavedUsers/ViewControllers/SavedUsersViewController.swift"
-            timestampString = "562718670.522342"
+            filePath = "UsersListApp/EditUser/ViewModels/EditUserViewModel.swift"
+            timestampString = "562805109.770581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "saveUser(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

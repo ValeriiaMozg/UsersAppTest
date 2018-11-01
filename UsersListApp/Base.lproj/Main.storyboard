@@ -102,6 +102,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="saveBtn" destination="YTJ-4E-Tch" id="d9G-Ok-TH0"/>
                         <outlet property="tableHeader" destination="k6q-m8-mBL" id="ktk-T3-65k"/>
                         <outlet property="tableView" destination="Vc3-Q0-5wJ" id="kKa-aL-TzY"/>
                     </connections>
@@ -121,6 +122,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9J8-XK-UGt">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="NLl-wP-Gzc">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -133,6 +139,9 @@
                         <viewLayoutGuide key="safeArea" id="LUL-di-zPq"/>
                     </view>
                     <navigationItem key="navigationItem" title="Saved" id="sCe-Wv-IKc"/>
+                    <connections>
+                        <outlet property="tableView" destination="9J8-XK-UGt" id="PGZ-vH-w7N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ma6-o7-pAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

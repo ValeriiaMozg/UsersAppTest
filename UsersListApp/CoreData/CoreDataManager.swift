@@ -126,5 +126,23 @@ extension CoreDataManager {
         
         return nil
     }
+    
+    func deleteUser(byEmail email: String) {
+        
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        
+        let predicate = NSPredicate(format: "email == %@", email)
+        
+        fetchRequest.predicate = predicate
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest as! NSFetchRequest<NSFetchRequestResult>)
+        
+        do {
+            try self.managedObjectContext.execute(batchDeleteRequest)
+            saveContext()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
 

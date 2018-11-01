@@ -7,25 +7,28 @@
 //
 
 import UIKit
+import RxSwift
 
 class CellWithTextfield: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textField: ValidatingTextField!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-       
-        textField.delegate = self
-    }
+    private let throttleInterval = 0.1
+    var disposeBag = DisposeBag()
 
-    func configure(withObj cellObj: EditProfileCellObject) {
-        nameLabel.text = cellObj.title
-        textField.text = cellObj.text
+    var cellObject: EditProfileCellObject? {
+        didSet {
+            nameLabel.text = cellObject?.title
+            textField.text = cellObject?.text.value
+        }
     }
-}
-
-extension CellWithTextfield: UITextFieldDelegate {
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
+    }
     
 }

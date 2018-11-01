@@ -10,5 +10,6 @@ inhibit_all_warnings!
     pod 'ObjectMapper'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode10.0'
     pod 'SDWebImage'
-
+    pod 'RxSwift'
+    pod 'RxCocoa'
 end

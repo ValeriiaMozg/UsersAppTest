@@ -3,6 +3,9 @@ PODS:
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
   - ObjectMapper (3.3.0)
+  - RxCocoa (4.3.1):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.3.1)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
@@ -12,6 +15,8 @@ DEPENDENCIES:
   - Alamofire (~> 4.3)
   - AlamofireImage (~> 3.1)
   - ObjectMapper
+  - RxCocoa
+  - RxSwift
   - SDWebImage
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode10.0`)
 
@@ -20,6 +25,8 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - ObjectMapper
+    - RxCocoa
+    - RxSwift
     - SDWebImage
 
 EXTERNAL SOURCES:
@@ -36,9 +43,11 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SwiftyJSON: fb09d26c0ec7c38aba1b19b73f3146dd0de185e8
 
-PODFILE CHECKSUM: c89fbb4fe6a38267f817aa2610223a0af0f78c70
+PODFILE CHECKSUM: cf777dc5023938dc6aa0ae93f51afd0a43de34c9
 
 COCOAPODS: 1.6.0.beta.1
