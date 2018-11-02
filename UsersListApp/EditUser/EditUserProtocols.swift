@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 protocol EditUserViewModelOutput: BaseViewModelOutput {
-    func addUserToSaved(_ user: UserDisplayModel)
+    func updateUserAvatar(_ avatar: UIImage)
 }
 
 protocol EditProfileHeaderInput: class {
@@ -19,4 +20,5 @@ protocol EditProfileHeaderInput: class {
 protocol EditProfileViewModelDataInput: class {
     
     func saveUser(_ user: UserDisplayModel, completion: () -> Void)
+    func updatePhoto(_ photo: UIImage, forUser user: UserDisplayModel, completion: () -> Void)
 }

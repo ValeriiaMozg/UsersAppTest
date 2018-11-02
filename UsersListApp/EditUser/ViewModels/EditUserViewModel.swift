@@ -74,6 +74,22 @@ extension EditUserViewModel: UITableViewDelegate {
     }
 }
 
+extension EditUserViewModel: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let img = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        
+        picker.dismiss(animated: true) {
+            if let user = self.user {
+                self.dataInput.updatePhoto(img, forUser: user, completion: {
+                    self.output?.updateUserAvatar(img)
+                })
+            }
+        }
+    }
+}
+
 extension EditUserViewModel {
 
     private func setupTextChangeHandling(_ cell: CellWithTextfield) {
@@ -91,9 +107,6 @@ extension EditUserViewModel {
         
             nameValid?.subscribe(onNext: {
                 cell.textField.valid = $0
-                
-                
-                
             }).disposed(by: cell.disposeBag)
             
 
@@ -120,12 +133,12 @@ extension EditUserViewModel {
             }).disposed(by: cell.disposeBag)
         }
         
-        guard let nv = nameValid, let ev = emailValid else {
+        guard let nv = nameValid, let ev = emailValid, let ph = phoneValid else {
             return
         }
         
         savingEnabled = Observable
-            .combineLatest(nv, ev) { $0 && $1 }
+            .combineLatest(nv, ev, ph) { $0 && $1 && $2 }
     }
     
     func validate(text: String?, for cellObj: EditProfileCellObject) -> Bool {
@@ -154,6 +167,8 @@ extension EditUserViewModel {
         
         let isValid = email.isEmpty == false && emailTest.evaluate(with: email)
         
+        user?.email = email
+        
         return isValid
     }
     
@@ -165,6 +180,9 @@ extension EditUserViewModel {
         let enteredText = CharacterSet(charactersIn: phone)
         
         let isValid = numbersOnly.isSuperset(of: enteredText)
+        
+        user?.phone = phone
+        
         return isValid
     }
 }

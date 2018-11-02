@@ -22,7 +22,12 @@ class UserTableCell: UITableViewCell {
     }
 
     func configure(withUser user: UserDisplayModel) {
-        avatarImgView.sd_setImage(with: URL(string: user.avatarTrumb))
+        if let img = user.userPickedAvatar {
+            avatarImgView.image = img
+        }
+        else {
+            avatarImgView.sd_setImage(with: URL(string: user.avatarTrumb))
+        }
         let username = user.name + " " + user.lastname
         nameLabel.text = username.capitalized
         phoneLabel.text = user.phone

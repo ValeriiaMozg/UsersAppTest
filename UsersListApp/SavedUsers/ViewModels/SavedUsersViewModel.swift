@@ -61,7 +61,7 @@ extension SavedUsersViewModel: UITableViewDelegate {
             
             let usrToRemove = content[indexPath.row]
 
-            CoreDataManager.shared.deleteUser(byEmail: usrToRemove.email)
+            dataInput.deleteUser(usrToRemove)
             content.remove(at: indexPath.row)
 
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -72,5 +72,11 @@ extension SavedUsersViewModel: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        output?.goToEditUser(content[indexPath.row])
     }
 }

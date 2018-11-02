@@ -12,10 +12,6 @@ class EditProfileHeader: UIView {
 
     @IBOutlet weak var profileImgView: UIImageView!
 
-    @IBAction func didClickChangePhoto(_ sender: UIButton) {
-        
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImgView.layer.cornerRadius = profileImgView.frame.width / 2
@@ -25,6 +21,12 @@ class EditProfileHeader: UIView {
 extension EditProfileHeader: EditProfileHeaderInput {
     
     func configure(withUser user: UserDisplayModel) {
-        profileImgView.sd_setImage(with: URL(string: user.avatarLarge))
+        
+        if let img = user.userPickedAvatar {
+            profileImgView.image = img
+        }
+        else {
+            profileImgView.sd_setImage(with: URL(string: user.avatarLarge))
+        }
     }
 }

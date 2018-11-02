@@ -39,6 +39,13 @@ class SavedUsersViewController: UIViewController {
 
 extension SavedUsersViewController: SavedUsersViewModelOutput {
     
+    func goToEditUser(_ user: UserDisplayModel) {
+        
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "EditUserViewController") as? EditUserViewController else { return }
+        vc.configureWithUser(user)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func reloadView() {
         tableView.reloadData()
     }

@@ -62,7 +62,60 @@ class EditUserViewController: UIViewController {
         }
     }
     
+    @IBAction func didClickChangePhoto(_ sender: UIButton) {
+        
+        let cameraAction = ("Camera", UIAlertAction.Style.default)
+        let cameraRollAction = ("Camera Roll", UIAlertAction.Style.default)
+        let cancelAction = ("Cancel", UIAlertAction.Style.cancel)
+        
+        showActionSheet(actions: [cameraAction, cameraRollAction, cancelAction], style: .actionSheet) { (action) in
+            switch action.title {
+            case "Camera"?:
+                self.openCamera()
+            case "Camera Roll"?:
+                self.openCameraRoll()
+            case "Cancel"?:
+                self.presentedViewController?.dismiss(animated: true, completion: nil)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func showActionSheet(title: String? = nil, message: String? = nil, actions: [(String, UIAlertAction.Style)], style: UIAlertController.Style, completion: @escaping (UIAlertAction) -> Void) {
+        let actionSheetController: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        
+        for i in 0..<actions.count {
+            let action = UIAlertAction(title: actions[i].0, style: actions[i].1, handler: completion)
+            actionSheetController.addAction(action)
+        }
+        
+        present(actionSheetController, animated: true, completion: nil)
+    }
+    
+    
+    private func openPicker(withSourceType sourceType: UIImagePickerController.SourceType) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self.viewModel
+            imagePicker.sourceType = sourceType;
+            imagePicker.allowsEditing = false
+            
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    private func openCamera() {
+        openPicker(withSourceType: .camera)
+    }
+    
+    private func openCameraRoll() {
+       openPicker(withSourceType: .photoLibrary)
+    }
+    
     private func initialSetup() {
+        
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
         tableView.tableFooterView = UIView()
@@ -75,16 +128,16 @@ class EditUserViewController: UIViewController {
     private func binding() {
     
         viewModel.savingEnabled?
-            .asObservable()
-            .bind(to: saveBtn.rx.isEnabled).disposed(by: disposeBag)
+            .bind(to: saveBtn.rx.isEnabled)
+            .disposed(by: disposeBag)
     }
 
 }
 
 extension EditUserViewController: EditUserViewModelOutput {
     
-    func addUserToSaved(_ user: UserDisplayModel) {
-        
+    func updateUserAvatar(_ avatar: UIImage) {
+        tableHeader.profileImgView.image = avatar
     }
 
     func reloadView() {

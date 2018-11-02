@@ -7,6 +7,7 @@
 //
 
 import CoreData
+import UIKit
 
 final class CoreDataManager {
     
@@ -74,26 +75,48 @@ extension CoreDataManager {
     
     func saveUser(_ user: UserDisplayModel, completion: () -> Void) {
         
-        let userEntity = UserEntity(context: managedObjectContext)
-        userEntity.email = user.email
-        userEntity.firstname = user.name
-        userEntity.lastname = user.lastname
-        userEntity.phone = user.phone
+        var userEntity: UserEntity?
         
-        let pictureEn = PictureEntity(context: managedObjectContext)
-        pictureEn.large = user.avatarLarge
-        pictureEn.thumbnail = user.avatarTrumb
+        if let userEn = fetchUser(user) {
+            userEntity = userEn
+        }
+        else {
+
+            userEntity = UserEntity(context: managedObjectContext)
+            userEntity?.userId = user.userId
+
+            let pictureEn = PictureEntity(context: managedObjectContext)
+            pictureEn.large = user.avatarLarge
+            pictureEn.thumbnail = user.avatarTrumb
+            
+            userEntity?.picture = pictureEn
+        }
         
-        userEntity.picture = pictureEn
+        userEntity?.email = user.email
+        userEntity?.firstname = user.name
+        userEntity?.lastname = user.lastname
+        userEntity?.phone = user.phone
         
         saveContext()
         completion()
     }
     
-    func fetchUser(byEmail email: String) -> UserEntity? {
+    func updateAvatar(_ user: UserDisplayModel) {
+        
+        guard let userEntity = fetchUser(user) else { return }
+        
+        let data = user.userPickedAvatar?.jpegData(compressionQuality: 1)
+        
+        userEntity.picture?.userLoadedAvatar = data
+        
+        saveContext()
+    }
+    
+    func fetchUser(_ user: UserDisplayModel) -> UserEntity? {
         
         let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
-        let predicate = NSPredicate(format: "email == %@", email)
+        
+        let predicate = NSPredicate(format: "%K = %@", #keyPath(UserEntity.userId), user.userId)
         
         fetchRequest.predicate = predicate
         
@@ -127,11 +150,11 @@ extension CoreDataManager {
         return nil
     }
     
-    func deleteUser(byEmail email: String) {
+    func deleteUser(_ user: UserDisplayModel) {
         
         let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
         
-        let predicate = NSPredicate(format: "email == %@", email)
+        let predicate = NSPredicate(format: "%K = %@", #keyPath(UserEntity.userId), user.userId)
         
         fetchRequest.predicate = predicate
         

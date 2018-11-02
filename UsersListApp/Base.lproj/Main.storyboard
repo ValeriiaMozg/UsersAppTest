@@ -61,10 +61,10 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <state key="normal" title="Change photo"/>
                                             <connections>
-                                                <action selector="didClickChangePhoto:" destination="k6q-m8-mBL" eventType="touchUpInside" id="Dqx-ER-sac"/>
+                                                <action selector="didClickChangePhoto:" destination="3hn-Yy-zoZ" eventType="touchUpInside" id="D82-cP-y7W"/>
                                             </connections>
                                         </button>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fDz-3i-kTt">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fDz-3i-kTt">
                                             <rect key="frame" x="137.5" y="33" width="100" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="HfO-RH-Hfg"/>

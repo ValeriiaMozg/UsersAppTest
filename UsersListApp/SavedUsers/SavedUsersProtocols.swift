@@ -9,13 +9,12 @@
 import Foundation
 
 protocol SavedUsersViewModelDataInput: class {
+    
     func obtainSavedUsers() -> [UserDisplayModel]?
+    func editUser(_ user: UserDisplayModel)
+    func deleteUser(_ user: UserDisplayModel)
 }
 
 protocol SavedUsersViewModelOutput: BaseViewModelOutput {
-    
-}
-
-protocol SavedUsersViewModelInput: class {
-//    func editUser(_)
+    func goToEditUser(_ user: UserDisplayModel)
 }
