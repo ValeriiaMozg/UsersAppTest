@@ -90,6 +90,13 @@ extension CoreDataManager {
             pictureEn.thumbnail = user.avatarTrumb
             
             userEntity?.picture = pictureEn
+            
+            if let av = user.userPickedAvatar  {
+                
+                let data = av.jpegData(compressionQuality: 1)
+                
+                userEntity?.picture?.userLoadedAvatar = data
+            }
         }
         
         userEntity?.email = user.email
